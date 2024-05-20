@@ -1,4 +1,3 @@
-import config
 from dotenv import load_dotenv
 
 import nextcord
@@ -7,10 +6,11 @@ import os
 
 load_dotenv()
 
-intents = nextcord.Intents.all()
-intents.members = True
+import config
 
-bot = commands.Bot(command_prefix='$', intents=intents)
+intents = nextcord.Intents.all()
+
+bot = commands.Bot(command_prefix=config.PREFIX, intents=intents)
 
 
 @bot.event
@@ -20,10 +20,9 @@ async def on_ready():
     await channel.send('Bot is ready.')
 
 # Load Cogs
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.{filename[:-3]}")
-
+for folder in os.listdir("cogs"):
+    if os.path.exists(os.path.join("cogs", folder, "cog.py")):
+        bot.load_extension(f"cogs.{folder}.cog")
 
 '''
 Error Handling

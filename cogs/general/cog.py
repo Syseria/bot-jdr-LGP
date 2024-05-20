@@ -1,29 +1,17 @@
 import nextcord
-from datetime import datetime, timedelta, timezone
 from nextcord.ext import commands
-from config import CHANNEL_ID
+from datetime import datetime, timedelta, timezone
+from config import BASE_CHANNEL
 
 
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="ping", description="Test")
-    async def ping(self, ctx):
-        latency = self.bot.latency * 1000
-
-        embed = nextcord.Embed(
-            title="Pong!",
-            description=f"Latency: {latency:.2f}ms",
-            colour=nextcord.Color.blurple()
-        )
-        embed.set_thumbnail(url=ctx.author.display_avatar)
-        await ctx.send(embed=embed)
-
     @commands.Cog.listener()
     async def on_member_join(self, member):
         guild = member.guild
-        channel = guild.get_channel(CHANNEL_ID)
+        channel = guild.get_channel(BASE_CHANNEL)
 
         if channel:
             # Example of an embed message
@@ -51,7 +39,7 @@ class General(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         guild = member.guild
-        channel = guild.get_channel(CHANNEL_ID)
+        channel = guild.get_channel(BASE_CHANNEL)
 
         if channel:
             embed = nextcord.Embed(
@@ -66,25 +54,5 @@ class General(commands.Cog):
             await channel.send(embed=embed)
 
 
-class GeneralSlash(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @nextcord.slash_command(name="ping", description="Test")
-    async def ping(self, interaction: nextcord.Interaction):
-        latency = self.bot.latency * 1000
-
-        embed = nextcord.Embed(
-            title="Pong!",
-            description=f"Latency: {latency:.2f}ms",
-            colour=nextcord.Color.blurple()
-        )
-        embed.set_thumbnail(url=interaction.user.display_avatar)
-        await interaction.response.send_message(embed=embed)
-
-
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(General(bot))
-    print('Cog General has been loaded!')
-    bot.add_cog(GeneralSlash(bot))
-    print('Cog GeneralSlash has been loaded!')
