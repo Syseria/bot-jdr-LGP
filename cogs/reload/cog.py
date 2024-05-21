@@ -12,19 +12,18 @@ class Reload(commands.Cog, name='Reload'):
     @commands.command(name="reload", description="Reloads the bot.")
     @commands.has_permissions(administrator=True)
     async def reload(self, ctx):
-        for filename_reload in os.listdir("./cogs"):
-            if filename_reload.endswith(".py"):
-                self.bot.reload_extension(f"cogs.{filename_reload[:-3]}")
-                print(f"Reloaded: {filename_reload}")
+        for folder in os.listdir("cogs"):
+            if os.path.exists(os.path.join("cogs", folder, "cog.py")):
+                self.bot.reload_extension(f"cogs.{folder}.cog")
         await ctx.send(f"Bot reloaded !")
 
     @nextcord.slash_command(name="reload", description="Reloads the bot.")
     @commands.has_permissions(administrator=True)
     async def reload(self, interaction: nextcord.Interaction):
-        for filename_reload in os.listdir("./cogs"):
-            if filename_reload.endswith(".py"):
-                self.bot.reload_extension(f"cogs.{filename_reload[:-3]}")
-                print(f"Reloaded: {filename_reload}")
+        for folder in os.listdir("cogs"):
+            if os.path.exists(os.path.join("cogs", folder, "cog.py")):
+                self.bot.reload_extension(f"cogs.{folder}.cog")
+                print(f"Reloaded: {folder}")
         await interaction.response.send_message(f"Bot reloaded !")
 
 

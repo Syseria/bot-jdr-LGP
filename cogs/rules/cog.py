@@ -1,12 +1,13 @@
 import nextcord
-import os
 from nextcord.ext import commands
 
+import config
+from cogs.rules.embed import set_rules
 from cogs.rules.rules_view import RulesView
 
 
-class Rules(commands.Cog, name='Rules Roles'):
-    """Creates buttons that assign roles"""
+class Rules(commands.Cog, name='Rules'):
+    """Setup the Rules channel"""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -16,11 +17,19 @@ class Rules(commands.Cog, name='Rules Roles'):
         """Called when the cog is loaded"""
         self.bot.add_view(RulesView())
 
-    @commands.command(name="rulesView", description="Creates a new role view for the rules.")
+    @commands.command(name="rules", description="Send the rules with the accept button.")
     @commands.has_permissions(administrator=True)
-    async def rules_role(self, ctx: commands.Context):
-        """Creates a new role view for the rules."""
-        await ctx.send("Test", view=RulesView())
+    async def setup_rules(self, ctx: commands.Context):
+        """Send the rules with the accept button."""
+        await ctx.send(embed=await set_rules(config.BASE_CHANNEL), view=RulesView())
+        await RulesView.wait()
+
+    @nextcord.slash_command(name="rules", description="Send the rules with the accept button.")
+    @commands.has_permissions(administrator=True)
+    async def slash_setup_rules(self, interaction: nextcord.Interaction):
+        """Send the rules with the accept button."""
+        await interaction.response.send_message(embed=await set_rules(config.BASE_CHANNEL), view=RulesView())
+        await RulesView.wait()
 
 
 def setup(bot: commands.Bot):

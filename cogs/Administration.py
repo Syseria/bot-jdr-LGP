@@ -16,7 +16,7 @@ class Administration(commands.Cog):
     @commands.command(name="setup", description="Setups the server.")
     @commands.has_permissions(administrator=True)
     async def setup_discord(self, ctx):
-        channels_to_create = ["bienvenue", "informations", "règles"]
+        channels_to_create = ["bienvenue", "information", "règles"]
         await ctx.send("Setting up the server...")
         # retrieves all the categories' names for this discord
         categories = [x for x in ctx.guild.categories]
@@ -42,13 +42,8 @@ class Administration(commands.Cog):
                 case "règles":
                     await set_rules(new_chan)
 
-                case "informations":
+                case "information":
                     await set_info(new_chan)
-
-    @commands.command(name="test", description="test")
-    @commands.has_permissions(administrator=True)
-    async def test(self, ctx):
-        await set_rules(ctx.message.channel)
 
 
 def setup(bot):

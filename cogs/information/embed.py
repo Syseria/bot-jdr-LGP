@@ -1,23 +1,7 @@
 import nextcord
 
 
-class RuleView(nextcord.ui.View):
-
-    rulesAccepted: bool = False
-    member: nextcord.Member = None
-
-    @nextcord.ui.button(label="J'accepte !",
-                        style=nextcord.ButtonStyle.success,
-                        custom_id="RulesAccepted")
-    async def rules_accepted(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        await interaction.response.send_message("Merci et bienvenu sur le discord de l'Espace JdR !",
-                                                ephemeral=True)
-        self.rulesAccepted = True
-        self.member = interaction.user
-        self.stop()
-
-
-async def set_rules(channel: nextcord.TextChannel):
+async def set_info(channel: nextcord.TextChannel) -> nextcord.Embed:
     embed = nextcord.Embed(
         title=f"Règles",
         colour=nextcord.Color.from_rgb(255, 0, 0),
@@ -55,20 +39,4 @@ async def set_rules(channel: nextcord.TextChannel):
         inline=False
     )
 
-    member = nextcord.Member
-    guild = nextcord.Guild
-    view = RuleView()
-
-    await channel.send(embed=embed, view=view)
-    await view.wait()
-
-    if view.rulesAccepted:
-        await view.member.add_roles(nextcord.Object(id(1242177867589091338)), reason="Rules Accepted")
-
-async def set_info(channel: nextcord.TextChannel):
-    return True
-
-
-async def set_welcome(channel: nextcord.TextChannel):
-    await channel.send("Welcome")
-
+    return embed

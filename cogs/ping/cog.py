@@ -22,7 +22,7 @@ class Ping(commands.Cog, name='Ping'):
         await ctx.send(embed=embed)
 
     @nextcord.slash_command(name="ping", description="Checks for a response from the bot")
-    async def ping(self, interaction: nextcord.Interaction):
+    async def slash_ping(self, interaction: nextcord.Interaction):
         latency = self.bot.latency * 1000
 
         embed = nextcord.Embed(

@@ -1,7 +1,7 @@
 import nextcord
 from nextcord.ext import commands
 from datetime import datetime, timedelta, timezone
-from config import BASE_CHANNEL
+from config import BOT_CHANNEL
 
 
 class General(commands.Cog):
@@ -11,7 +11,7 @@ class General(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         guild = member.guild
-        channel = guild.get_channel(BASE_CHANNEL)
+        channel = guild.get_channel(BOT_CHANNEL)
 
         if channel:
             # Example of an embed message
@@ -24,7 +24,7 @@ class General(commands.Cog):
             embed.add_field(name='Information', value="Ce Discord a pour bût de faciliter la gestion et la "
                                                       "communication de l'espace JdR du festival La Grande Partie "
                                                       "qui aura lieu du 8 au 10 Novembre 2024!\n\n"
-                                                      "Tu pourras trouver plein d'informations utiles telles que ("
+                                                      "Tu pourras trouver plein d'information utiles telles que ("
                                                       "mais pas seulement):\n"
                                                       "- La Liste des JdRs proposés lors de l'événement ainsi qu'une "
                                                       "brève introduction de ceux-ci,\n"
@@ -39,7 +39,7 @@ class General(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         guild = member.guild
-        channel = guild.get_channel(BASE_CHANNEL)
+        channel = guild.get_channel(BOT_CHANNEL)
 
         if channel:
             embed = nextcord.Embed(

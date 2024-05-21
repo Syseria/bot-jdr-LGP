@@ -16,7 +16,7 @@ bot = commands.Bot(command_prefix=config.PREFIX, intents=intents)
 @bot.event
 async def on_ready():
     print(f"Bot {bot.user.name} is ready with id ({bot.user.id}).")
-    channel = bot.get_channel(config.BASE_CHANNEL)
+    channel = bot.get_channel(config.BOT_CHANNEL)
     await channel.send('Bot is ready.')
 
 # Load Cogs
