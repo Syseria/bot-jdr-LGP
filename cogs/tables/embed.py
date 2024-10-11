@@ -1,12 +1,10 @@
 import nextcord
 
 
-async def set_rules() -> nextcord.Embed:
+async def set_new_table() -> nextcord.Embed:
     embed = nextcord.Embed(
-        title=f"Règles",
-        colour=nextcord.Color.from_rgb(255, 0, 0),
-        description=f"Afin d'accéder à l'intégralité du serveur, veuillez lire les règles ci-dessous et les accepter.\n\
-        En acceptant ces règles, vous vous engagez à les respecter et acceptez toute sanction pouvant en découler."
+        title=f"Outils de création d'une table",
+        colour=nextcord.Color.dark_gold()
     )
     embed.add_field(
         name=":large_blue_diamond: Pseudo",

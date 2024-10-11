@@ -1,41 +1,35 @@
 import nextcord
 
 
-async def set_info(channel: nextcord.TextChannel) -> nextcord.Embed:
+async def set_info() -> nextcord.Embed:
     embed = nextcord.Embed(
-        title=f"Règles",
-        colour=nextcord.Color.from_rgb(255, 0, 0),
-        description=f"Afin d'accéder à l'intégralité du serveur, veuillez lire les règles ci-dessous et les accepter.\n\
-        En acceptant ces règles, vous vous engagez à les respecter et acceptez toute sanction pouvant en découler."
+        title=f"Comment ça fonctionne ?",
+        colour=nextcord.Color.from_rgb(254, 193, 68),
+        description=f"Vous trouverez ici tous les `One Shots` proposés pendant le festival, accompagnées d'un bref "
+                    f"aperçu \
+                    et aurez la possibilité de vous y inscrire. Si une table est pleine, vous serez mis sur \
+                    `liste d'attente` et serez contacté dans le cas d'un désistement."
     )
     embed.add_field(
-        name=":large_blue_diamond: Pseudo",
-        value="Celui-ci doit correspondre à votre Prénom.\n\
-        Ceci afin de faciliter la communication et les échanges entre nous tous.\
-        Surement vouer à changer suivant l'implémentation du bot",
+        name=":large_blue_diamond: One Shots",
+        value="Vous trouverez dans cette catégorie différents `channels` portant chacun le nom d'une partie de jeu \
+              proposée par nos ${Dungeon Masters} lors du festival. Vous y lirez un bref aperçu de l'aventure que \
+              vous pourriez y vivre si vous décidiez de rejoindre cette aventure (ou plus communément appelée: \
+              table).\n\n\
+              Si la table vous intéresse, vous pourrez vous y inscrire en cliquant sur le bouton `Je m'inscrit !` \
+              que vous trouverez au bas du descriptif. Vous serez alors invité à nous donner quelques informations \
+              telles que le nombre de personnes que vous inscrivez à la table et vos informations de contact.\n\n\
+              NB: Toutes les informations transmises seront effacées une fois le festival terminées.",
         inline=False
     )
     embed.add_field(
-        name=":large_blue_diamond: Image de profil",
-        value="Celle-ci ne doit pas véhiculer de message offensant.",
-        inline=False
-    )
-    embed.add_field(
-        name=":large_blue_diamond: @everyone et @here",
-        value="Tout le monde a la possibilité d'utiliser ces tags.\n\
-        Utiliser les correctement et n'en abusez pas !",
-        inline=False
-    )
-    embed.add_field(
-        name=":red_square: NSFW",
-        value="Le contenu NSFW est strictement banni de ce serveur.\n\
-        Cette décision est irrévocable et non ouverte à discussion.\n\
-        Nous sommes ici pour partager une passion. Que nous soyons suffisament agé ou non,\
-        ce type de contenu n'a pas sa place ici.\n\
-        NB: Certain JdR pourrait être amené, de part leur univers, à enfreindre cette règle,\
-        merci de nous en mettre au courant AVANT de poster du contenu, que nous puissions \
-        mettre en place les barrières minimales.\
-        Toute infraction volontaire à cette règle entraînera un bannissement immédiat.",
+        name=":large_blue_diamond: Tables",
+        value="Cette catégorie apparaîtra une fois inscrit à une table et vous y retrouverez toutes les \
+              tables auxquelles vous êtes inscrit et attendu. Il s'agira aussi du premier moyen de notification \
+              utilisé pour vous rappelé de vous présenter 5 minutes avant le début de votre session à l'espace JdR.\n\n\
+              NB: Si vous n'avez pas transmis de numéro de téléphone, que nous ne pouvons vous contacter \
+              via Discord et que vous ne vous présenté pas à l'espace JdR dans les 5 minutes après l'heure de début \
+              convenue, nous réattribuerons votre place.",
         inline=False
     )
 

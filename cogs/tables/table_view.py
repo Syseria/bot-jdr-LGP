@@ -2,10 +2,10 @@ import nextcord
 import config
 from utils.utils import custom_id
 
-VIEW_NAME = "RoleView"
+VIEW_NAME = "NewTableView"
 
 
-class InfoView(nextcord.ui.View):
+class NewTableView(nextcord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
